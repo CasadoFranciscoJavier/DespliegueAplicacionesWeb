@@ -8,11 +8,37 @@ services:
       - "8080:80"
     volumes:
       - ./web:/usr/share/nginx/html:ro
+    networks:
+      - tienda_network
 
   db:
     image: mysql:8.0
     container_name: tienda_animales_db
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
+      - mysql_data:/var/lib/mysql
       - ./mysql:/docker-entrypoint-initdb.d
+    networks:
+      - tienda_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: tienda_animales_phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - tienda_network
+
+volumes:
+  mysql_data:
+
+networks:
+  tienda_network:
