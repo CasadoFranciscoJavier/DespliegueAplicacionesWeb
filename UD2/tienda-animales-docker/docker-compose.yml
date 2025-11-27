@@ -37,6 +37,22 @@ services:
     networks:
       - tienda_network
 
+  app:
+    build: ./app
+    image: tienda_animales_app:1.0
+    container_name: tienda_animales_app
+    ports:
+      - "8082:80"
+    environment:
+      DB_HOST: db
+      DB_NAME: ${MYSQL_DATABASE}
+      DB_USER: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      - tienda_network
+
 volumes:
   mysql_data:
 

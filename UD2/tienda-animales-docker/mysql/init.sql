@@ -15,4 +15,4 @@ INSERT INTO mascotas (nombre, tipo, edad, disponible) VALUES
 ('Michi', 'Gato', 3, TRUE),
 ('Rocky', 'Perro', 1, TRUE),
 ('Nube', 'Conejo', 1, FALSE),
-('Piolín', 'Ave', 4, TRUE);
+('Piolin', 'Ave', 4, TRUE);
