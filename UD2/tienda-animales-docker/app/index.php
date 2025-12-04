@@ -28,6 +28,12 @@ try {
     </style>
 </head>
 <body>
+<nav>
+    <ul class="menu">
+        <li><a href="/tienda/">Inicio</a></li>
+        <li><a href="/mascotas/">Mascotas</a></li>
+    </ul>
+</nav>
     <h1>Listado de Mascotas</h1>
 
     <?php if (empty($mascotas)): ?>

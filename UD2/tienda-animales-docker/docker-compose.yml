@@ -10,6 +10,17 @@ services:
     networks:
       - tienda_network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: "256M"
+
 
   db:
     image: mysql:8.0
@@ -24,6 +35,12 @@ services:
       - ./mysql:/docker-entrypoint-initdb.d
     networks:
       - tienda_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: on-failure
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -36,6 +53,7 @@ services:
       PMA_PASSWORD: ${MYSQL_PASSWORD}
     networks:
       - tienda_network
+    restart: on-failure
 
   app:
     build: ./app
@@ -50,6 +68,25 @@ services:
       DB_PASSWORD: ${MYSQL_PASSWORD}
     depends_on:
       - db
+    networks:
+      - tienda_network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: "256M"
+    restart: on-failure
+
+  proxy:
+    image: nginx:alpine
+    container_name: tienda_animales_proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - web
+      - app
     networks:
       - tienda_network
 
