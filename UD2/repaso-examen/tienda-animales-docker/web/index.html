@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tienda de Animales Dockerizada</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Tienda de Animales "La Can-Tina" 🐾</h1>
+        <nav>
+            <ul class="menu">
+                <li><a href="/tienda/">Inicio</a></li>
+                <li><a href="/mascotas/">Mascotas</a></li>
+            </ul>
+        </nav>
+        <p>Bienvenido a nuestra tienda dockerizada.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Nuestras secciones</h2>
+            <ul>
+                <li>Perros</li>
+                <li>Gatos</li>
+                <li>Roedores</li>
+                <li>Aves</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Mensaje del sistema</h2>
+            <p id="mensaje"></p>
+        </section>
+
+        <section>
+            <h2>Información</h2>
+            <p>
+                Esta web está siendo servida por <strong>Nginx</strong> dentro de un contenedor Docker.
+                La base de datos MySQL (con mascotas de ejemplo) también está en otro contenedor.
+            </p>
+        </section>
+
+        <section>
+            <h2>Consulta nuestras mascotas</h2>
+            <p>
+                <a href="http://localhost:8082" target="_blank">Ver listado de mascotas</a>
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Mundo Mascota. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
